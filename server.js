@@ -17,18 +17,18 @@ app.use(express.json());
 app.use(express.static("public"));
 
 //render route for /index
-router.get('/', (req,res) => {
+app.get('/', (req,res) => {
     res.sendFile(path.join(__dirname + "./index.html"));
 });
 
 //render route for /exercise
-router.get('/exercise', (req, res) =>{
-    res.sendFile(path.join(__dirname + "./exercise.html"));
+app.get('/exercise', (req, res) =>{
+    res.sendFile(path.join(__dirname + "/public/exercise.html"));
 });
 
 //render route for /stats
-router.get('/stats', (req, res) =>{
-    res.sendFile(path.join(__dirname + "./stats.html"));
+app.get('/stats', (req, res) =>{
+    res.sendFile(path.join(__dirname + "/public/stats.html"));
 });
 
 //get route for combined weight of multiple exercises
