@@ -6,12 +6,6 @@ const mongoose = require("mongoose");
 
 const PORT = process.env.PORT || 3000;
 
-const opts = { useNewUrlParser: true, 
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false  
-}; 
-
 const db = require("./models");
 
 const app = express();
@@ -26,9 +20,9 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populate", { us
 app.use(express.static("public"));
 
 //render route for /index
-app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname + "./index.html"));
-});
+// app.get('/', (req,res) => {
+//     res.sendFile(path.join(__dirname + "./index.html"));
+// });
 
 //render route for /exercise
 app.get('/exercise', (req, res) =>{
