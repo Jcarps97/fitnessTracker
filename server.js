@@ -47,7 +47,7 @@ app.get("/api/workouts", (req, res)=> {
     console.log("View workouts route completes")
 })
 
-//get route for combined weight of multiple exercises
+//get route for range5
 
 //get route for total duration of each workout
 
@@ -57,7 +57,6 @@ app.post('/api/workouts', (req, res) => {
     console.log("New workout route hits")
     db.Workout.create(req.body)
     .then(resp => {
-        //Currently not collecting exercise data
         res.json(resp)
         console.log(resp)
         console.log("New workout route completes")
@@ -68,7 +67,15 @@ app.post('/api/workouts', (req, res) => {
 });
 
 //post or put route for adding new exercise to most recent workout
-
+app.put('/api/workouts/:id', (req, res) => {
+    db.Workout.findByIdAndUpdate({_id: req.params.id}, { $push: { exercises: req.body } }, { new: true })
+        .then(updated => {
+            res.json(updated);
+        })
+        .catch(err => {
+            res.json(err);
+        });
+})
 
 
 
