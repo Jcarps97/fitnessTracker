@@ -49,9 +49,6 @@ app.get("/api/workouts", (req, res)=> {
 
 //get route for range5
 
-//get route for total duration of each workout
-
-
 //post route for adding new workout
 app.post('/api/workouts', (req, res) => {
     console.log("New workout route hits")
@@ -75,6 +72,24 @@ app.put('/api/workouts/:id', (req, res) => {
         .catch(err => {
             res.json(err);
         });
+})
+
+
+//get route for range
+app.get('/api/workouts/range' ,(req, res) => {
+    db.Workout.aggregate([
+        {
+        $addFields: {
+            totalDuration: { $sum: "$exercises" }
+        }
+    }
+    ])
+    .then(duration => {
+        res.json(duration)
+    })
+    .catch(err => {
+        res.json(err)
+    })
 })
 
 
